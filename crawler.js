@@ -38,7 +38,7 @@ export async function crawl(startURL, maxPages = 5) {
         }
 
 
-        return results
-
+        
     }
+    return results
 }
