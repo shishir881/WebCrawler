@@ -110,9 +110,24 @@ You should return **filtered and ranked pages**.
 
 ##  Model Freedom (Up to You)
 
+You may use:
+
+* Logistic regression
+* XGBoost
+* Neural network
+* Rule-based scoring (initially acceptable)
+
+Suggested features to use:
+
+* `content_depth`
+* `is_actionable`
+* `is_error_page`
+* `link_density`
+* `grammar_quality_score`
+
 ---
 
-## ⚙️ FastAPI Skeleton (Minimal)
+##  FastAPI Skeleton (Minimal)
 
 ```python
 from fastapi import FastAPI
@@ -180,3 +195,146 @@ Once this works, the crawler becomes a **full ML-powered web intelligence pipeli
 ---
 
 If anything here is unclear, **do not change the Node.js side** — adapt FastAPI to this contract.
+
+---
+
+ Running the Node.js Crawler (For ML/FastAPI Teammate)
+
+Even if you are only working on the FastAPI ML service, you should be able to **run the Node.js crawler locally** to test end-to-end integration.
+
+### Prerequisites
+
+Make sure you have:
+
+* **Node.js v18+** (recommended LTS)
+* **npm** (comes with Node)
+* **Python 3.9+** (for FastAPI later)
+* Git
+
+Check versions:
+
+```bash
+node -v
+npm -v
+python --version
+```
+
+---
+
+### 1️ Clone the Repository
+
+```bash
+git clone <repo-url>
+cd WebCrawler
+```
+
+---
+
+### 2️ Install Node Dependencies
+
+```bash
+npm install
+```
+
+This installs:
+
+* HTTP client
+* HTML parser
+* Groq client
+* CLI utilities
+
+---
+
+### 3️ Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+GROQ_API_KEY=your_groq_api_key_here
+USE_FASTAPI=true
+FASTAPI_URL=http://localhost:8000/filter
+```
+
+If FastAPI is **not running yet**, you can temporarily disable it:
+
+```env
+USE_FASTAPI=false
+```
+
+---
+
+### 4️ Run the Crawler
+
+```bash
+npm start
+```
+
+You will see a CLI menu:
+
+```text
+1. Start crawling with custom URL
+2. Use default settings
+3. Exit
+```
+
+Choose **option 2** to quickly test.
+
+---
+
+### 5 What Should Happen
+
+Pipeline stages:
+
+1. **Web Crawling** – fetches pages and extracts text
+2. **LLM Structuring (Groq)** – converts raw text → structured JSON
+3. **FastAPI ML Filtering** (optional) – ranks & filters pages
+
+Final output:
+
+```text
+filtered_results.json
+```
+
+---
+
+### 6 FastAPI Integration Test (When Ready)
+
+Once your FastAPI service is running:
+
+```bash
+uvicorn app:app --reload
+```
+
+Ensure:
+
+```env
+USE_FASTAPI=true
+FASTAPI_URL=http://localhost:8000/filter
+```
+
+Node.js will POST structured pages to FastAPI and save the filtered response.
+
+---
+
+### 🔧 Common Issues
+
+**Error: `USE_FASTAPI is not defined`**
+
+* You forgot to set it in `.env`
+* Or `dotenv.config()` is missing in `src/index.js`
+
+**Crawler runs but no ML filtering**
+
+* Set `USE_FASTAPI=true`
+* Confirm FastAPI endpoint `/filter` exists
+
+---
+
+## Important Rule **Do NOT change the JSON contract** without syncing with the Node side.
+
+Node.js = data producer
+FastAPI = decision & ranking layer
+
+---
+
+You are now fully set up to develop and test the ML filtering service 🚀
