@@ -2,9 +2,10 @@
   "name": "webcrawler",
   "version": "1.0.0",
   "description": "Web Crawler",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,9 @@
   },
   "homepage": "https://github.com/SandeshOjha06/WebCrawler#readme",
   "dependencies": {
-    "axios": "^1.13.2"
-  },
-  "devDependencies": {}
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "groq-sdk": "^0.37.0"
+  }
 }
