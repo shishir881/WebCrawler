@@ -45,13 +45,3 @@ def calculate_priority(seed_vector, current_text):
     current_vector = sim_model.encode(current_text, convert_to_tensor=True)
     score = util.cos_sim(seed_vector, current_vector)
     return float(score[0][0])
-
-data = get_hybrid_spam_status("https://sportshard.com/",
-                              {
-    "link_density": 0.133,
-    "has_urgency_words": False,
-    "is_error_page": False,
-    "grammar_quality_score": 0.8,
-    "suspicious_patterns": 2
-  })
-print(data)  # ("Spam", 0.0)
