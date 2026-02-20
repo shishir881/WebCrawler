@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 __pycache__/
 *.py[cod]
 *$py.class
@@ -65,3 +66,15 @@ log.txt
 site/
 docs_build/
 archive.zip
+=======
+# Node modules
+node_modules/
+
+# Logs
+*.log
+
+# Environment files
+.env
+
+
+>>>>>>> upstream/master

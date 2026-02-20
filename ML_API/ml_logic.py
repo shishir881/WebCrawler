@@ -1,5 +1,5 @@
 import tensorflow as tf
-from tensorflow.keras.models import load_model
+from tensorflow.keras.models import load_model  # type: ignore
 import pickle
 import numpy as np
 from sentence_transformers import SentenceTransformer, util
