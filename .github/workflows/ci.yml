@@ -1,0 +1,10 @@
+name: Project Check
+on: [push] # This tells GitHub to run every time you push code
+
+jobs:
+  check-code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # Downloads your code to GitHub's server
+      - name: Simple Status Check
+        run: echo "Code pushed successfully!" # A simple command that always passes
